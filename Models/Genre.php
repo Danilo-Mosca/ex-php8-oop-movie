@@ -7,10 +7,10 @@ class Genre extends Movie
     private $genre = [];     // ora genre è un array quindi posso assegnargli più valori
 
     // creo il costruttore
-    function __construct($_title, $_director, $_releaseYear, $_duration, $_language, $_genre)
+    function __construct($_title, $_director, $_releaseYear, $_duration, $_language, $_description, $_genre)
     {
         // richiamo il costruttore genitore (Movie) e gli passo i parametri richiesti per istanziare una sua classe
-        parent::__construct($_title, $_director, $_releaseYear, $_duration, $_language);
+        parent::__construct($_title, $_director, $_releaseYear, $_duration, $_description, $_language);
 
         // assegno un valore all'attributo $genre (specifico della classe Genre):
         $this->genre = $_genre;

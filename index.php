@@ -2,9 +2,14 @@
 
 // Prima importo il trait:
 require_once 'Traits/Votes.php';
+
 // Poi importo le classi:
 require_once 'Models/Movies.php';
 require_once 'Models/Genre.php';
+
+// importo gli array di oggetti che conterranno i dati:
+require_once './db.php';
+
 
 
 // -------------------------------- PROVE PRIMA DEL LAYOUT --------------------------------
@@ -41,19 +46,6 @@ require_once 'Models/Genre.php';
 
 // -------------------------------- FINE PROVE PRIMA DEL LAYOUT --------------------------------
 
-
-
-// istanzio due oggetti Genre (classe che estende Movie):
-$inception = new Genre("Inception", "Christopher Nolan", 2010, 148, "Inglese", ["Sci-Fi"]);
-$pulpFiction = new Genre("Pulp Fiction", "Quentin Tarantino", 1994, 154, "Inglese", ["Crime", "Azione"]);
-$matrix = new Genre("The Matrix", "Lana & Lilly Wachowski", 1999, 136, "Inglese", ["Sci-Fi", "Azione", "Fantascenza"]);
-
-/* DOPO AVER ASSEGNATO IL TRAITS VOTES ALLA CLASSE MOVIES LO SETTO: */
-// Assegno un voto alle istanze (l'attributo vote fa parte del "trait Votes" che è usato nella "classe Movies"):
-$inception->setRating(8.8);
-$pulpFiction->setRating(8.9);
-$matrix->setRating(9.8);
-
 ?>
 
 <!DOCTYPE html>
@@ -79,62 +71,33 @@ $matrix->setRating(9.8);
     <div class="container">
         <div class="row">
 
-            <div class="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center my-3">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <strong>Film</strong>
+            <?php
+            foreach ($films as $film) {
+            ?>
+
+                <div class="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center my-3">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <strong>Film</strong>
+                        </div>
+
+                        <ul class="list-group list-group-flush text-center">
+                            <li class="list-group-item"><?php echo "Titolo: <strong>" . $film->getTitle() . "</strong>"; ?></li>
+                            <li class="list-group-item"><?php echo "Regista: <strong>" . $film->getDirector() . "</strong>"; ?></li>
+                            <li class="list-group-item"><?php echo "Anno di uscita: <strong>" . $film->getReleaseYear() . "</strong>"; ?></li>
+                            <li class="list-group-item"><?php echo "Durata: <strong>" . $film->getDuration() . "</strong> min"; ?></li>
+                            <li class="list-group-item"><?php echo "Descrizione:<br><strong>" . $film->getLanguage() . "</strong>"; ?></li>
+                            <li class="list-group-item"><?php echo "Lingua originale: <strong>" . $film->getDescription() . "</strong>"; ?></li>
+                            <li class="list-group-item"><?php echo "Genere: <strong>" . $film->getGenre() . "</strong>"; ?></li>
+                            <li class="list-group-item"><?php echo "Voto: <strong>" . $film->getRating() . "</strong>"; ?></li>
+                        </ul>
+
                     </div>
-                    <ul class="list-group list-group-flush text-center">
-
-                        <li class="list-group-item"><?php echo "Titolo: <strong>" . $inception->getTitle() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Regista: <strong>" . $inception->getDirector() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Data di uscita: <strong>" . $inception->getReleaseYear() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Durata: <strong>" . $inception->getDuration() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Lingua: <strong>" . $inception->getLanguage() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Genere: <strong>" . $inception->getGenre() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Voto: <strong>" . $inception->getRating() . "</strong>"; ?></li>
-
-                    </ul>
                 </div>
-            </div>
+            <?php
+            }
+            ?>
 
-            <div class="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center my-3">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <strong>Film</strong>
-                    </div>
-                    <ul class="list-group list-group-flush text-center">
-
-                        <li class="list-group-item"><?php echo "Titolo: <strong>" . $pulpFiction->getTitle() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Regista: <strong>" . $pulpFiction->getDirector() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Data di uscita: <strong>" . $pulpFiction->getReleaseYear() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Durata: <strong>" . $pulpFiction->getDuration() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Lingua: <strong>" . $pulpFiction->getLanguage() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Genere: <strong>" . $pulpFiction->getGenre() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Voto: <strong>" . $pulpFiction->getRating() . "</strong>"; ?></li>
-
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center my-3">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <strong>Film</strong>
-                    </div>
-                    <ul class="list-group list-group-flush text-center">
-
-                        <li class="list-group-item"><?php echo "Titolo: <strong>" . $matrix->getTitle() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Regista: <strong>" . $matrix->getDirector() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Data di uscita: <strong>" . $matrix->getReleaseYear() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Durata: <strong>" . $matrix->getDuration() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Lingua: <strong>" . $matrix->getLanguage() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Genere: <strong>" . $matrix->getGenre() . "</strong>"; ?></li>
-                        <li class="list-group-item"><?php echo "Voto: <strong>" . $matrix->getRating() . "</strong>"; ?></li>
-
-                    </ul>
-                </div>
-            </div>
         </div>
     </div>
 

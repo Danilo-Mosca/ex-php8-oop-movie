@@ -9,18 +9,20 @@ class Movie
     public $releaseYear;
     public $duration;
     public $language;
+    public $description;
 
     // con l'istruzione: use Nome_Traits specifico che la "classe Movies" deve utilizzare il trait "Votes":
     use Votes;
 
     // creo il costruttore
-    function __construct($_title, $_director, $_releaseYear, $_duration, $_language)
+    function __construct($_title, $_director, $_releaseYear, $_duration, $_language, $_description)
     {
         $this->title = $_title;
         $this->director = $_director;
         $this->releaseYear = $_releaseYear;
         $this->duration = $_duration;
         $this->language = $_language;
+        $this->description = $_description;
     }
 
     // metodi getter:
@@ -49,6 +51,10 @@ class Movie
         return $this->language;
     }
 
+    public function getDescription() {
+        return $this->description;
+    }
+
     // metodi setter:
     public function setTitle($title)
     {
@@ -73,6 +79,11 @@ class Movie
     public function setLanguage($language)
     {
         $this->language = $language;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 
     // Stampo a schermo le informazioni del film:
