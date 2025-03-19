@@ -131,7 +131,7 @@ class Genre extends Movie
                 $values .= " - ";
             }
         }
-        
+
         // Infine ritorno la variabile $values con tutti i suoi valori:
         return $values;
     }
@@ -168,16 +168,13 @@ var_dump($inception);
 var_dump($pulpFiction);
 
 // stampo a schermo il singolo valore genre (specifico della classe Genre):
-echo "------------------<br><strong>Valore 'genre' specifico dell'oggetto/istanza della classe Genre:</strong><br>";
-echo $inception->getGenre();
-echo $pulpFiction->getGenre();
-
-
-// Mentre inception posso visualizzarlo tranquillamente senza ciclo perchè possiede un solo genre:
+echo "------------------<br><strong>Valore 'genre' specifico dell'oggetto/istanza della classe Genre con metodo getGenre():</strong><br>";
 echo "<br>Genere Inception: " . $inception->getGenre() . "<br>";
+echo "<br>Genere Pulp Fiction: " . $pulpFiction->getGenre() . "<br>";
 echo "------------------<br>";
 
 // stampo a schermo i valori degli attributi dell'istanza richiamando la funzione getInfoMovieWithGenre():
+echo "<br><strong>Valore 'genre' specifico dell'oggetto/istanza della classe Genre con metodo getInfoMovieWithGenre():</strong><br>";
 echo "<br>------------------<br>" . $inception->getInfoMovieWithGenre();
 echo "<br>------------------<br>" . $pulpFiction->getInfoMovieWithGenre();
 
