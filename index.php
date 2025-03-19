@@ -7,16 +7,18 @@ class Movie
     public $title;
     public $director;
     public $releaseYear;
+    public $genre;
     public $rating;
     public $duration;
     public $language;
 
     // creo il costruttore
-    function __construct($_title, $_director, $_releaseYear, $_rating, $_duration, $_language)
+    function __construct($_title, $_director, $_releaseYear, $_genre, $_rating, $_duration, $_language)
     {
         $this->title = $_title;
         $this->director = $_director;
         $this->releaseYear = $_releaseYear;
+        $this->genre = $_genre;
         $this->rating = $_rating;
         $this->duration = $_duration;
         $this->language = $_language;
@@ -36,6 +38,11 @@ class Movie
     public function getReleaseYear()
     {
         return $this->releaseYear;
+    }
+
+    public function getGenre()
+    {
+        return $this->genre;
     }
 
     public function getRating()
@@ -69,6 +76,11 @@ class Movie
         $this->releaseYear = $releaseYear;
     }
 
+    public function setGenre($genre)
+    {
+        $this->genre = $genre;
+    }
+
     public function setRating($rating)
     {
         $this->rating = $rating;
@@ -83,23 +95,30 @@ class Movie
     {
         $this->language = $language;
     }
+
+    // Stampo a schermo le informazioni del film:
+    public function getInfoMovie() {
+        return "Titolo: " . $this->title 
+        . "<br>Regista: " . $this->director 
+        . "<br>Anno di uscita: " . $this->releaseYear
+        . "<br>Genere: " . $this->genre
+        . "<br>Voto: " . $this->rating
+        . "<br>Durata film: " . $this->duration
+        . "<br>Lingua film: " . $this->language;
+    }
 }
 
 // istanzio due oggetti movie:
-$inception = new Movie("Inception", "Christopher Nolan", 2010, 8.8, 148, "Inglese");
-$pulpFiction = new Movie(
-    "Pulp Fiction",
-    "Quentin Tarantino",
-    1994,
-    8.9,
-    154,
-    "Inglese",
-);
+$inception = new Movie("Inception", "Christopher Nolan", 2010, "Sci-Fi", 8.8, 148, "Inglese");
+$pulpFiction = new Movie("Pulp Fiction", "Quentin Tarantino", 1994, "Crime", 8.9, 154, "Inglese");
 
-// stampo a schermo i valori delle due proprietà:
+// stampo a schermo i valori delle due proprietà con var_dump():
 var_dump($inception);
 var_dump($pulpFiction);
 
+// stampo a schermo i valori degli attributi dell'istanza richiamando la funzione getInfoMovie():
+echo $inception->getInfoMovie();
+echo "<br>---------<br>" . $pulpFiction->getInfoMovie();
 ?>
 
 <!DOCTYPE html>
