@@ -1,0 +1,16 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Classe di debug */
+.debug {
+    border: 1px solid red;
+}
+
+div.card {
+    width: 500px;
+    max-width: 500px;
+}
