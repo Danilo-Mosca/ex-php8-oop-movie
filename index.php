@@ -100,10 +100,10 @@ class Movie
 class Genre extends Movie
 {
     // variabili d'istanza per l'oggetto Genre:
-    public $genre;
+    public $genre = [];     // ora genre è un array quindi posso assegnargli più valori
 
     // creo il costruttore
-    function __construct($_title, $_director, $_releaseYear, $_rating, $_duration, $_language, $_genre)
+    function __construct($_title, $_director, $_releaseYear, $_rating, $_duration, $_language, $_genre = [])
     {
         // richiamo il costruttore genitore (Movie) e gli passo i parametri richiesti per istanziare una sua classe
         parent::__construct($_title, $_director, $_releaseYear, $_rating, $_duration, $_language);
@@ -115,7 +115,25 @@ class Genre extends Movie
     // metodi getter:
     public function getGenre()
     {
-        return $this->genre;
+        // PER OTTENERE TUTTI I VALORI DELL'ARRAY genre DEVO CICLARE QUEST'ULTIMO E CONTATENARE TUTTI I SUOI VALORI AD UNA VARIABILE, PER FARE QUESTO ESEGUO I SEGUENTI STEP:
+
+        // prima assegno ad una variabile di appoggio "$values" i valori di tutti i generi presenti nell'array (inizializzandola a vuota ''):
+        $values = '';
+        // poi assegno ad una variabile di appoggio di nome $length la lunghezza dell'array $genre[]:
+        $length = count($this->genre);
+        // Poi devo ciclare nell'array genre con un for, un while, un do...while o un foreach, in questo caso utilizzo il for:
+        for ($i = 0; $i < $length; $i++) {
+            // ora assegno concatenando tutti i valori contenuti nell'attributo genre alla variabile $values:
+            $values .= $this->genre[$i];
+
+            // Infine controllo se il contatore $i è minore di soltanto 1 valore della lunghezza di length - 1 e in tal caso aggiungo un separatore, nel momento in cui in contatore $i sarà uguale a length-1 significa che il ciclo sta per terminare e che non ci sono più generi da aggiungere alla variabile $values, quindi non ho bisogno di aggiungere altri separatori:
+            if ($i < $length - 1) {
+                $values .= " - ";
+            }
+        }
+        
+        // Infine ritorno la variabile $values con tutti i suoi valori:
+        return $values;
     }
 
     // metodi setter:
@@ -130,7 +148,7 @@ class Genre extends Movie
         return "Titolo: " . $this->title
             . "<br>Regista: " . $this->director
             . "<br>Anno di uscita: " . $this->releaseYear
-            . "<br>Genere: " . $this->genre
+            . "<br>Genere: " . $this->getGenre()
             . "<br>Voto: " . $this->rating
             . "<br>Durata film: " . $this->duration
             . "<br>Lingua film: " . $this->language;
@@ -142,22 +160,27 @@ class Genre extends Movie
 // $pulpFiction = new Movie("Pulp Fiction", "Quentin Tarantino", 1994, "Crime", 8.9, 154, "Inglese");
 
 // istanzio due oggetti Genre (classe che estende Movie):
-$inception = new Genre("Inception", "Christopher Nolan", 2010, 8.8, 148, "Inglese", "Sci-Fi");
-$pulpFiction = new Genre("Pulp Fiction", "Quentin Tarantino", 1994, 8.9, 154, "Inglese", "Crime");
+$inception = new Genre("Inception", "Christopher Nolan", 2010, 8.8, 148, "Inglese", ["Sci-Fi"]);
+$pulpFiction = new Genre("Pulp Fiction", "Quentin Tarantino", 1994, 8.9, 154, "Inglese", ["Crime", "Azione"]);
 
 // stampo a schermo i valori di entrambi gli oggetti con var_dump():
 var_dump($inception);
 var_dump($pulpFiction);
 
 // stampo a schermo il singolo valore genre (specifico della classe Genre):
-echo "------------------<br><strong>Singolo valore:</strong><br>";
-echo "Genere: " . $inception->getGenre() . "<br>";
-echo "Genere: " . $pulpFiction->getGenre() . "<br>";
+echo "------------------<br><strong>Valore 'genre' specifico dell'oggetto/istanza della classe Genre:</strong><br>";
+echo $inception->getGenre();
+echo $pulpFiction->getGenre();
+
+
+// Mentre inception posso visualizzarlo tranquillamente senza ciclo perchè possiede un solo genre:
+echo "<br>Genere Inception: " . $inception->getGenre() . "<br>";
 echo "------------------<br>";
 
 // stampo a schermo i valori degli attributi dell'istanza richiamando la funzione getInfoMovieWithGenre():
 echo "<br>------------------<br>" . $inception->getInfoMovieWithGenre();
 echo "<br>------------------<br>" . $pulpFiction->getInfoMovieWithGenre();
+
 ?>
 
 <!DOCTYPE html>
