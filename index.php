@@ -119,7 +119,7 @@ class Genre extends Movie
 
         // prima assegno ad una variabile di appoggio "$values" i valori di tutti i generi presenti nell'array (inizializzandola a vuota ''):
         $values = '';
-        // poi assegno ad una variabile di appoggio di nome $length la lunghezza dell'array $genre[]:
+        // poi assegno ad una variabile di appoggio di nome $length la lunghezza dell'array $genre[], attraverso la funzione count() che ritorna il numero degli elementi in un array:
         $length = count($this->genre);
         // Poi devo ciclare nell'array genre con un for, un while, un do...while o un foreach, in questo caso utilizzo il for:
         for ($i = 0; $i < $length; $i++) {
