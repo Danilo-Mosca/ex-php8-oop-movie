@@ -124,12 +124,6 @@ class Genre extends Movie
         $this->genre = $genre;
     }
 
-    // stampo a schermo solo il genere del film:
-    public function getGenreMovie()
-    {
-        return "<br>Genere: " . $this->genre;
-    }
-
     // stampo a schermo le informazioni del film e il genere:
     public function getInfoMovieWithGenre()
     {
@@ -156,14 +150,14 @@ var_dump($inception);
 var_dump($pulpFiction);
 
 // stampo a schermo il singolo valore genre (specifico della classe Genre):
-echo "---------<br><strong>Singolo valore:</strong>";
-echo $inception->getGenreMovie();
-echo $pulpFiction->getGenreMovie();
-echo "<br>---------<br>";
+echo "------------------<br><strong>Singolo valore:</strong><br>";
+echo "Genere: " . $inception->getGenre() . "<br>";
+echo "Genere: " . $pulpFiction->getGenre() . "<br>";
+echo "------------------<br>";
 
 // stampo a schermo i valori degli attributi dell'istanza richiamando la funzione getInfoMovieWithGenre():
-echo "<br>---------<br>" . $inception->getInfoMovieWithGenre();
-echo "<br>---------<br>" . $pulpFiction->getInfoMovieWithGenre();
+echo "<br>------------------<br>" . $inception->getInfoMovieWithGenre();
+echo "<br>------------------<br>" . $pulpFiction->getInfoMovieWithGenre();
 ?>
 
 <!DOCTYPE html>
